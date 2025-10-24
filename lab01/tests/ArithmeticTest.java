@@ -20,6 +20,8 @@ public class ArithmeticTest {
         assertThat(Arithmetic.product(5, -6)).isEqualTo(-30);
         assertThat(Arithmetic.product(0, -6)).isEqualTo(0);
         assertThat(Arithmetic.product(-5, -6)).isEqualTo(30);
+        // My Own Test
+        assertThat(Arithmetic.product(89,64)).isEqualTo(5696);
     }
 
     /** Performs a few arbitrary tests to see if the sum method is correct */
@@ -32,5 +34,7 @@ public class ArithmeticTest {
         assertThat(Arithmetic.sum(0, -6)).isEqualTo(-6);
         assertThat(Arithmetic.sum(6, -6)).isEqualTo(0);
         assertThat(Arithmetic.sum(-5, -5)).isEqualTo(-10);
+        // My Own Test
+        assertThat(Arithmetic.sum(89,64)).isEqualTo(153);
     }
 }
