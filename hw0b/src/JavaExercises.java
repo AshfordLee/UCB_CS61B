@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class JavaExercises {
@@ -6,7 +7,9 @@ public class JavaExercises {
     /** Returns an array [1, 2, 3, 4, 5, 6] */
     public static int[] makeDice() {
         // TODO: Fill in this function.
-        return null;
+        int[] array={1,2,3,4,5,6};
+        return array;
+        // return null;
     }
 
     /** Returns the order depending on the customer.
@@ -15,14 +18,45 @@ public class JavaExercises {
      *  In any other case, return an empty String[] of size 3. */
     public static String[] takeOrder(String customer) {
         // TODO: Fill in this function.
-        return null;
+        String[] Ergun_food={"beyti", "pizza", "hamburger", "tea"};
+        String[] Erik_food={"sushi", "pasta", "avocado", "coffee"};
+        if (customer.equals("Ergun"))
+        {
+            return Ergun_food;
+        }
+        else if (customer.equals("Erik"))
+        {
+            return Erik_food;
+        }
+        else
+        {
+            return new String[3];
+        }
+        // return null;
     }
 
     /** Returns the positive difference between the maximum element and minimum element of the given array.
      *  Assumes array is nonempty. */
     public static int findMinMax(int[] array) {
         // TODO: Fill in this function.
-        return 0;
+        int minvalue=array[0];
+        int maxvalue=array[0];
+
+        for (int values:array)
+        {
+            if (values>maxvalue)
+            {
+                maxvalue=values;
+            }
+
+            if (values<minvalue)
+            {
+                minvalue=values;
+            }
+        }
+        int difference=maxvalue-minvalue;
+        return difference;
+        // return 0;
     }
 
     /**
@@ -39,7 +73,27 @@ public class JavaExercises {
 
     private static List<Integer> hailstoneHelper(int x, List<Integer> list) {
         // TODO: Fill in this function.
-        return null;
+
+        if (x==1) // recursion exit
+        {
+            list.add(x);
+            return list;
+        }
+
+        else if (x % 2==0) // even
+        {
+            list.add(x);
+            hailstoneHelper(x/2,list);
+        }
+
+        else if (x%2!=0) // odd
+        {
+            list.add(x);
+            hailstoneHelper(3*x+1,list);
+        }
+
+        return list;
+        // return null;
     }
 
 }
