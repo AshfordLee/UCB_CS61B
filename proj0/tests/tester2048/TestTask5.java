@@ -119,4 +119,30 @@ public class TestTask5 {
 
         assertWithMessage("Boards should match:").that(TestUtils.boardToString(board)).isEqualTo(TestUtils.boardToString(expected));
    }
+
+    /** Checks 2204. */
+    @Test
+    @Tag("task5")
+    @Order(5)
+    @DisplayName("2204")
+    @GradedTest(number = "5.4")
+    public void testSkip() {
+        int[][] board = new int[][]{
+                {0, 0, 2, 0},
+                {0, 0, 2, 0},
+                {0, 0, 0, 0},
+                {0, 0, 4, 0},
+        };
+
+        GameLogic.tiltColumn(board, 2);
+
+        int[][] expected = new int[][]{
+                {0, 0, 4, 0},
+                {0, 0, 4, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+        };
+
+        assertWithMessage("Boards should match:").that(TestUtils.boardToString(board)).isEqualTo(TestUtils.boardToString(expected));
+    }
 }

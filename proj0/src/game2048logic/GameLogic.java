@@ -20,6 +20,42 @@ public class GameLogic {
      */
     public static int moveTileUpAsFarAsPossible(int[][] board, int r, int c, int minR) {
         // TODO: Fill this in in tasks 2, 3, 4
+        if (r==0 || r==minR)
+        // If on the first row, no need to move up.
+        {
+            return 0;
+        }
+
+        int value=board[r][c];
+        int min_row=r-1;
+        for(;min_row>=0;min_row-=1)
+        {
+            if (board[min_row][c]!=0 )
+            {
+                if (min_row<minR)
+                {
+                    break;
+                }
+
+                if (board[min_row][c]==value)
+                {
+                    // merge occurs
+                    value=2*value;
+                    board[min_row][c]=value;
+                    board[r][c]=0;
+                    return 1+min_row;
+                }
+                break;
+            }
+        }
+
+
+        if (min_row+1!=r) // if there need moving up
+        {
+            board[min_row + 1][c] = value; // Move up.
+
+            board[r][c] = 0; // Original position is 0 now.
+        }
         return 0;
     }
 
@@ -32,6 +68,17 @@ public class GameLogic {
      */
     public static void tiltColumn(int[][] board, int c) {
         // TODO: fill this in in task 5
+        int num_rows=board.length;
+        int merge_happen=0; // remember the row where merge happens, the next merge cannot happen
+        // upper more than or equal this row
+        for(int i=0;i<num_rows;i+=1)
+        {
+            int temp=moveTileUpAsFarAsPossible(board,i,c,merge_happen);
+            if (temp>merge_happen)
+            {
+                merge_happen=temp;
+            }
+        }
         return;
     }
 
@@ -42,6 +89,11 @@ public class GameLogic {
      */
     public static void tiltUp(int[][] board) {
         // TODO: fill this in in task 6
+        int num_cols=board[0].length;
+        for (int i=0;i<num_cols;i+=1)
+        {
+            tiltColumn(board,i);
+        }
         return;
     }
 
@@ -55,12 +107,24 @@ public class GameLogic {
     public static void tilt(int[][] board, Side side) {
         // TODO: fill this in in task 7
         if (side == Side.EAST) {
+            rotateLeft(board);
+            tiltUp(board);
+            rotateRight(board);
             return;
         } else if (side == Side.WEST) {
+            rotateRight(board);
+            tiltUp(board);
+            rotateLeft(board);
             return;
         } else if (side == Side.SOUTH) {
+            rotateRight(board);
+            rotateRight(board);
+            tiltUp(board);
+            rotateLeft(board);
+            rotateLeft(board);
             return;
         } else {
+            tiltUp(board);
             return;
         }
     }
